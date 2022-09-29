@@ -1,0 +1,26 @@
+options
+
+random category
+random show number
+random year
+full random
+
+
+picked show number
+picked  year
+picked category
+
+
+daily double
+final jeopardy
+number of teams
+rounds
+
+--------------------
+win type
+score limit
+highest score
+
+
+
+
