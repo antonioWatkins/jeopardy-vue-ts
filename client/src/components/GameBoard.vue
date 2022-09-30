@@ -1,35 +1,16 @@
 <template>
   <div class="gameBoard-container">
-    <div class="gameBoard"></div>
-    <Column v-show="getGameData" :index="0" />
+    <div class="gameBoard">
+    <!-- <Column v-show="getGameData" :index="0" /> -->
+    <Column v-for="num in 5" :columnData="getColumnData(num)" :key="num" />
+    </div>
     <section class="scoreboard"></section>
-    <button @click="getGameData">Game Button</button>
-    <!-- <div>{{ columnData }}</div> -->
   </div>
-  <RouterView />
 </template>
 
 <script>
-import { RouterLink, RouterView } from "vue-router";
 import Column from "@/components/Column.vue";
 import { ref, onMounted } from "vue";
-
-// const showNumbers = [6295, 6296, 6297, 6298, 6299, 6300];
-// const showNumber =
-//   showNumbers[Math.floor(Math.random() * showNumbers.length)];
-// const GameData = ref([]);
-// let Game = ref([]);
-
-// const getGameData = async () => {
-//   const res = await fetch("questions.json")
-//   const json = await res.json().then((data) => (GameData.value = data))
-
-//   console.log(json);
-
-//   Game.value = json.filter(
-//     (data) => data.showNumber === showNumber
-//   );
-// };
 
 export default {
   name: "GameBoard",
@@ -44,8 +25,9 @@ export default {
     let doubleJeopardyData = ref([]);
     let categories = ref([]);
     let columnData = ref([]);
+    let columnInfo = [];
 
-    const getGameData = async (index) => {
+    const getGameData = async () => {
       const res = await fetch("questions.json");
       const json = await res.json().then((data) => (GameData.value = data));
       Game.value = GameData.value.filter(
@@ -61,28 +43,19 @@ export default {
       categories.value = jeopardyData.value
         .filter((data) => data.value === "$200")
         .map((data) => data.category);
-
-      columnData.value = jeopardyData.value.filter(
-        (data) => data.category == categories.value[index]
-      );
     };
 
     const getColumnData = (index) => {
-      const columnData =  jeopardyData.value.filter(
-      (data) => data.category == categories.value[index] )
-      console.log('col data', columnData)
-      return columnData;
-      }
+      columnInfo = jeopardyData.value.filter(
+        (data) => data.category == categories.value[index]
+      );
+      return columnInfo;
+    };
 
     onMounted(() => {
       getGameData();
-      getColumnData(0);
-      getColumnData(1);
-    });
 
-    categories.value = jeopardyData.value.filter(
-      (data) => data.value === "$200"
-    );
+    });
     return {
       GameData,
       getGameData,
@@ -90,20 +63,20 @@ export default {
       jeopardyData,
       doubleJeopardyData,
       categories,
-      columnData,getColumnData
+      columnData,
+      getColumnData,
+      columnInfo,
     };
   },
 };
 
-//   {
-//   "showNumber": 6295,
-//   "airDate": "1/20/12",
-//   "round": "Jeopardy!",
-//   "category": "NIGHT QUILL",
-//   "value": "$200",
-//   "question": "In the 1880s explorer Sir Richard Burton prepared a 16-volume English translation of these tales",
-//   "answer": "the Arabian Nights"
-// },
+
 </script>
 
-<style></style>
+<style>
+.gameBoard{
+  background-color: gray;
+  display:flex;
+flex-direction: row;
+justify-content: center;}
+</style>

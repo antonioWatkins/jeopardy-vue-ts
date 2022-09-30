@@ -21,11 +21,7 @@ export default {
 </script>
 
 <style>
-/* .gameboard {
-  display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px 100px;
-  grid-template-rows: repeat(6, 100px);
-} */
+
 
 
 </style>

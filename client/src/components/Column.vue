@@ -2,8 +2,6 @@
   <div class="column-container">
     <section>
       <Square v-for="data in columnData" :data="data" :key="data" />
-      
-
     </section>
   </div>
 
@@ -15,7 +13,7 @@
 import Square from "@/components/Square.vue";
 
 export default {
-  props: { columnData: Array, index: Number },
+  props: { columnData: Array },
   name: "Column",
   components: { Square },
 
@@ -26,10 +24,12 @@ export default {
 </script>
 
 <style>
-.column {
+.column-container {
   /* display: grid;
   grid-template-columns: 100px;
   grid-template-rows: repeat(6, 100px); */
+  display:flex;
+  flex-direction: column;
 }
 
 .square {

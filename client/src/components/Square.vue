@@ -2,6 +2,7 @@
   <div class="square">
     {{ data.value }} 
     {{data.question}}
+    {{data.category}}
     
   </div>
 </template>
@@ -22,9 +23,13 @@ export default {
 
 <style>
 .square {
+  display:flex;
+  align-items: center;
+  justify-content: center;
   height: 200px;
   width: 200px;
-  background-color: red;
+  background-color: blue;
+  color: white;
   border: 1px;
   border-style: solid;
 }
