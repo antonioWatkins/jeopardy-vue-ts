@@ -1,7 +1,10 @@
 <template>
   <div class="column-container">
     <section>
+      <CategorySquare :category="columnData[0].category" />
       <Square v-for="data in columnData" :data="data" :key="data" />
+
+    
     </section>
   </div>
 
@@ -11,11 +14,12 @@
 <script>
 // import { RouterLink, RouterView } from "vue-router";
 import Square from "@/components/Square.vue";
+import CategorySquare from "@/components/CategorySquare.vue";
 
 export default {
   props: { columnData: Array },
   name: "Column",
-  components: { Square },
+  components: { Square, CategorySquare },
 
   setup(props) {
     return {};
@@ -31,6 +35,5 @@ export default {
   display:flex;
   flex-direction: column;
 }
-
 
 </style>
