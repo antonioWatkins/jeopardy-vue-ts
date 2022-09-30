@@ -1,10 +1,11 @@
 <template>
-  <div class="square">
+  <button class="square" @click="updateQuestion">
     {{ data.value }} 
     {{data.question}}
     {{data.category}}
     
-  </div>
+  </button>
+
 </template>
 
 <script>
@@ -15,8 +16,15 @@ export default {
     },
   },
   name: "Square",
-  setup(){
-    return {};
+  setup(props, context){
+
+    const updateQuestion = () => {
+      context.emit("updateQuestion", props.data.question);
+    }
+
+    
+
+    return { updateQuestion };
   },
 };
 </script>
@@ -32,5 +40,7 @@ export default {
   color: white;
   border: 1px;
   border-style: solid;
+  cursor: pointer;
 }
+
 </style>

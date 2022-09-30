@@ -1,25 +1,26 @@
 <template>
   <div class="gameBoard-container">
+    <button @click="getGameData()">Refresh</button>
     <div class="gameBoard">
-    <!-- <Column v-show="getGameData" :index="0" /> -->
+    <QuestionDisplay  @update-question="(data)=> storeQuestion(data)"  />
     <Column v-for="(category, index) in categories" :columnData="getColumnData(index)" :key="index" />
     </div>
     <section class="scoreboard"></section>
-    <div>{{categories}}</div>
+    <div>{{ question }}</div>
   </div>
 </template>
 
 <script>
 import Column from "@/components/Column.vue";
+import QuestionDisplay from "@/components/QuestionDisplay.vue";
 import { ref, onMounted } from "vue";
 
 export default {
   name: "GameBoard",
-  components: { Column },
+  components: { Column, QuestionDisplay },
   setup() {
-    const showNumbers = [ 6296, 6297, 6298, 6299, 6300];
-    const showNumber =
-      showNumbers[Math.floor(Math.random() * showNumbers.length)];
+    const showNumbers = [ 6296, 6297, 6298, 6300];
+
     const GameData = ref([]);
     let Game = ref([]);
     let jeopardyData = ref([]);
@@ -27,8 +28,15 @@ export default {
     let categories = ref([]);
     let columnData = ref([]);
     let columnInfo = [];
+    const question = ref("");
+
+    const storeQuestion = (data) => (question.value = data);
 
     const getGameData = async () => {
+      const showNumber =
+      showNumbers[Math.floor(Math.random() * showNumbers.length)];
+      console.log('show num', showNumber)
+
       const res = await fetch("questions.json");
       const json = await res.json().then((data) => (GameData.value = data));
       Game.value = GameData.value.filter(
@@ -67,6 +75,8 @@ export default {
       columnData,
       getColumnData,
       columnInfo,
+      storeQuestion,
+      question,
     };
   },
 };
