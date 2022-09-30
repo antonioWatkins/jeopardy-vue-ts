@@ -2,9 +2,10 @@
   <div class="gameBoard-container">
     <div class="gameBoard">
     <!-- <Column v-show="getGameData" :index="0" /> -->
-    <Column v-for="num in 5" :columnData="getColumnData(num)" :key="num" />
+    <Column v-for="(category, index) in categories" :columnData="getColumnData(index)" :key="index" />
     </div>
     <section class="scoreboard"></section>
+    <div>{{categories}}</div>
   </div>
 </template>
 
@@ -16,7 +17,7 @@ export default {
   name: "GameBoard",
   components: { Column },
   setup() {
-    const showNumbers = [6295, 6296, 6297, 6298, 6299, 6300];
+    const showNumbers = [ 6296, 6297, 6298, 6299, 6300];
     const showNumber =
       showNumbers[Math.floor(Math.random() * showNumbers.length)];
     const GameData = ref([]);

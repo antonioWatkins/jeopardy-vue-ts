@@ -32,8 +32,5 @@ export default {
   flex-direction: column;
 }
 
-.square {
-  /* border: 1px; */
-  /* border-style: solid; */
-}
+
 </style>
