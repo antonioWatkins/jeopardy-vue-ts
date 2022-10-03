@@ -1,16 +1,18 @@
 <template>
 <div>
-    <div class="QuestionDisplay">Question Display</div>
-    <div>{{ question }}</div>
+    <div class="QuestionDisplay">Question Display
+    </div>
+      <slot/>
+    <div>{{ data }}</div>
 </div>
 </template>
 
 <script>
-import { ref } from "vue";
 export default {
   props: {
+    index: Number,
     data: {
-      type: String,
+      type: Array,
     },
   },
   name: "QuestionDisplay",
@@ -22,7 +24,7 @@ export default {
 
 <style>
 .QuestionDisplay {
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 600px;

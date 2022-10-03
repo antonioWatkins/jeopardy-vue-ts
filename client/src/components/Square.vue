@@ -1,5 +1,5 @@
 <template>
-  <button class="square" @click="updateQuestion">
+  <button @click="something" class="square">
     {{ data.value }} 
     {{data.question}}
     {{data.category}}
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     data: {
@@ -16,15 +17,11 @@ export default {
     },
   },
   name: "Square",
-  setup(props, context){
-
-    const updateQuestion = () => {
-      context.emit("updateQuestion", props.data.question);
-    }
-
-    
-
-    return { updateQuestion };
+  setup(props, context) {
+    const something = () => {
+      context.emit("somethingElse", props.data);
+    };
+    return { something };
   },
 };
 </script>

@@ -2,7 +2,11 @@
   <div class="gameBoard-container">
     <button @click="getGameData()">Refresh</button>
     <div class="gameBoard">
-    <QuestionDisplay  @update-question="(data)=> storeQuestion(data)"  />
+    <QuestionDisplay @somethingElse="data => console.log(data)" :data="data[0]">
+      <div>
+        {{ data }}
+      </div>
+    </QuestionDisplay>
     <Column v-for="(category, index) in categories" :columnData="getColumnData(index)" :key="index" />
     </div>
     <section class="scoreboard"></section>
@@ -28,6 +32,7 @@ export default {
     let categories = ref([]);
     let columnData = ref([]);
     let columnInfo = [];
+    const data = ref([]);
     const question = ref("");
 
     const storeQuestion = (data) => (question.value = data);
@@ -77,6 +82,7 @@ export default {
       columnInfo,
       storeQuestion,
       question,
+      data,
     };
   },
 };
