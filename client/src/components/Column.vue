@@ -2,7 +2,7 @@
   <div class="column-container">
     <section>
       <CategorySquare :category="columnData[0].category" />
-      <Square v-for="data in columnData" :data="data" :key="data" />
+      <Square @select-question="(value)=>{selectQuestionInColumn(value)}" v-for="data in columnData" :data="data" :key="data" />
 
     
     </section>
@@ -21,8 +21,14 @@ export default {
   name: "Column",
   components: { Square, CategorySquare },
 
-  setup(props) {
-    return {};
+  setup(props, context) {
+    const selectQuestionInColumn = (dataFromSquare) => {
+      console.log('columnEmit', dataFromSquare);
+      context.emit("selectQuestion", dataFromSquare);
+    
+    }
+
+    return {selectQuestionInColumn};
   },
 };
 </script>

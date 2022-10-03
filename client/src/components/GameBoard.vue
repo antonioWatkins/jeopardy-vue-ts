@@ -1,9 +1,9 @@
 <template>
   <div class="gameBoard-container">
     <button @click="getGameData()">Refresh</button>
+    <QuestionDisplay :selectedQuestion="selectedQuestion" />
     <div class="gameBoard">
-    <QuestionDisplay  @update-question="(data)=> storeQuestion(data)"  />
-    <Column v-for="(category, index) in categories" :columnData="getColumnData(index)" :key="index" />
+    <Column @select-question="(value)=>storeQuestion(value)" v-for="(category, index) in categories" :columnData="getColumnData(index)" :key="index" />
     </div>
     <section class="scoreboard"></section>
     <div>{{ question }}</div>
@@ -28,9 +28,12 @@ export default {
     let categories = ref([]);
     let columnData = ref([]);
     let columnInfo = [];
-    const question = ref("");
+    const selectedQuestion = ref("");
 
-    const storeQuestion = (data) => (question.value = data);
+    const storeQuestion = (dataFromSquare)=>{
+        console.log('gameboard', dataFromSquare);
+        selectedQuestion.value = dataFromSquare;
+    }
 
     const getGameData = async () => {
       const showNumber =
@@ -76,7 +79,7 @@ export default {
       getColumnData,
       columnInfo,
       storeQuestion,
-      question,
+      selectedQuestion,
     };
   },
 };

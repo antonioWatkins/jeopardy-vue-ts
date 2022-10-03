@@ -1,5 +1,5 @@
 <template>
-  <button class="square" @click="updateQuestion">
+  <button class="square" @click="()=>{selectQuestionInSquare()}">
     {{ data.value }} 
     {{data.question}}
     {{data.category}}
@@ -18,13 +18,15 @@ export default {
   name: "Square",
   setup(props, context){
 
-    const updateQuestion = () => {
-      context.emit("updateQuestion", props.data.question);
+    const selectQuestionInSquare = () => {
+       console.log('squareEmit', props.data)
+      context.emit("selectQuestion", props.data);
+    
     }
 
     
 
-    return { updateQuestion };
+    return { selectQuestionInSquare };
   },
 };
 </script>

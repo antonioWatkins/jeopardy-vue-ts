@@ -1,7 +1,13 @@
 <template>
 <div>
-    <div class="QuestionDisplay">Question Display</div>
-    <div>{{ question }}</div>
+
+
+    <div class="QuestionDisplay">
+      <div>Question: {{ selectedQuestion.question }}</div>
+      <div>Answer: {{ selectedQuestion.answer }}</div>
+      <div>{{ selectedQuestion.value }}</div>
+    </div>
+ 
 </div>
 </template>
 
@@ -9,13 +15,14 @@
 import { ref } from "vue";
 export default {
   props: {
-    data: {
-      type: String,
-    },
+    selectedQuestion: {},
   },
   name: "QuestionDisplay",
   setup(){
-    return {};
+    const showingAnswer = ref(false);
+    const showAnswer = () => {}
+
+    return {showingAnswer, showAnswer};
   },
 };
 </script>
@@ -23,6 +30,7 @@ export default {
 <style>
 .QuestionDisplay {
   display:flex;
+    flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 600px;
