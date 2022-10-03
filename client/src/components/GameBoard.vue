@@ -1,9 +1,16 @@
 <template>
   <div class="gameBoard-container">
     <button @click="getGameData()">Refresh</button>
-    <QuestionDisplay :selectedQuestion="selectedQuestion" />
+    <QuestionDisplay @close="toggleModal" v-if="showModal" :selectedQuestion="selectedQuestion" />
     <div class="gameBoard">
-    <Column @select-question="(value)=>storeQuestion(value)" v-for="(category, index) in categories" :columnData="getColumnData(index)" :key="index" />
+      <Column
+        @select-question="(value) => storeQuestion(value)"
+        v-for="(category, index) in categories"
+        :columnData="getColumnData(index)"
+        :key="index"
+        @click="toggleModal()"
+  
+      />
     </div>
     <section class="scoreboard"></section>
     <div>{{ question }}</div>
@@ -19,7 +26,7 @@ export default {
   name: "GameBoard",
   components: { Column, QuestionDisplay },
   setup() {
-    const showNumbers = [ 6296, 6297, 6298, 6300];
+    const showNumbers = [6296, 6297, 6298, 6300];
 
     const GameData = ref([]);
     let Game = ref([]);
@@ -28,17 +35,21 @@ export default {
     let categories = ref([]);
     let columnData = ref([]);
     let columnInfo = [];
-    const selectedQuestion = ref("");
+    let showModal = ref(false);
+    const selectedQuestion = ref({});
+    const toggleModal = () => {
+      showModal.value = !showModal.value;
+    };
 
-    const storeQuestion = (dataFromSquare)=>{
-        console.log('gameboard', dataFromSquare);
-        selectedQuestion.value = dataFromSquare;
-    }
+    const storeQuestion = (dataFromSquare) => {
+      console.log("gameboard", dataFromSquare);
+      selectedQuestion.value = dataFromSquare;
+    };
 
     const getGameData = async () => {
       const showNumber =
-      showNumbers[Math.floor(Math.random() * showNumbers.length)];
-      console.log('show num', showNumber)
+        showNumbers[Math.floor(Math.random() * showNumbers.length)];
+      console.log("show num", showNumber);
 
       const res = await fetch("questions.json");
       const json = await res.json().then((data) => (GameData.value = data));
@@ -66,7 +77,6 @@ export default {
 
     onMounted(() => {
       getGameData();
-
     });
     return {
       GameData,
@@ -80,17 +90,18 @@ export default {
       columnInfo,
       storeQuestion,
       selectedQuestion,
+      toggleModal,
+      showModal,
     };
   },
 };
-
-
 </script>
 
 <style>
-.gameBoard{
+.gameBoard {
   background-color: gray;
-  display:flex;
-flex-direction: row;
-justify-content: center;}
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 </style>

@@ -19,7 +19,7 @@ export default {
   setup(props, context){
 
     const selectQuestionInSquare = () => {
-       console.log('squareEmit', props.data)
+      console.log('squareEmit', props.data)
       context.emit("selectQuestion", props.data);
     
     }

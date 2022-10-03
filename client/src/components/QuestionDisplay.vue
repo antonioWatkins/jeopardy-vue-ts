@@ -1,14 +1,11 @@
 <template>
-<div>
-
-
-    <div class="QuestionDisplay">
+  <div>
+    <div class="QuestionDisplay" @click.self="closeModal">
       <div>Question: {{ selectedQuestion.question }}</div>
       <div>Answer: {{ selectedQuestion.answer }}</div>
       <div>{{ selectedQuestion.value }}</div>
     </div>
- 
-</div>
+  </div>
 </template>
 
 <script>
@@ -18,19 +15,22 @@ export default {
     selectedQuestion: {},
   },
   name: "QuestionDisplay",
-  setup(){
+  setup(props, context) {
     const showingAnswer = ref(false);
-    const showAnswer = () => {}
+    const showAnswer = () => {};
+    const closeModal = () => {
+      context.emit("close");
+    };
 
-    return {showingAnswer, showAnswer};
+    return { showingAnswer, showAnswer, closeModal };
   },
 };
 </script>
 
 <style>
 .QuestionDisplay {
-  display:flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 600px;
