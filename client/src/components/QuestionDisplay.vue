@@ -33,11 +33,13 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 600px;
-  width: 800px;
+  height: 100vh;
+  width: 100vw;
   background-color: blue;
   color: white;
   border: 1px;
   border-style: solid;
+  font-size: 60px;
+  text-align: center;
 }
 </style>

@@ -40,6 +40,7 @@ export default {
   grid-template-rows: repeat(6, 100px); */
   display:flex;
   flex-direction: column;
+
 }
 
 </style>

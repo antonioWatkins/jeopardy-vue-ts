@@ -1,9 +1,6 @@
 <template>
   <button class="square" @click="()=>{selectQuestionInSquare()}">
     {{ data.value }} 
-    {{data.question}}
-    {{data.category}}
-    
   </button>
 
 </template>
@@ -21,10 +18,7 @@ export default {
     const selectQuestionInSquare = () => {
       console.log('squareEmit', props.data)
       context.emit("selectQuestion", props.data);
-    
-    }
-
-    
+    };
 
     return { selectQuestionInSquare };
   },
@@ -36,13 +30,20 @@ export default {
   display:flex;
   align-items: center;
   justify-content: center;
-  height: 200px;
-  width: 200px;
-  background-color: blue;
-  color: white;
-  border: 1px;
-  border-style: solid;
+  height: 160px;
+  width: 240px;
+  margin: 2px;
+  border-radius: 5%;
+  background-color: #060ce9;
+  color: gold;
+  border: 5px solid black;
+  text-align: center;
+  font-size: 30px;
   cursor: pointer;
+}
+
+.square:hover {
+  background-color: blue;
 }
 
 </style>

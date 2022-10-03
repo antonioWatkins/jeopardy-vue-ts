@@ -1,16 +1,20 @@
 <template>
   <div class="gameBoard-container">
-    <button @click="getGameData()">Refresh</button>
-    <QuestionDisplay @close="toggleModal" v-if="showModal" :selectedQuestion="selectedQuestion" />
+    <div class="controls">
+      <button @click="getGameData()">Refresh</button>
+      <button >Start!</button>
+    </div>
+
     <div class="gameBoard">
-      <Column
+      <QuestionDisplay @close="toggleModal" v-if="showModal" :selectedQuestion="selectedQuestion" />
+      <div class="grid" v-if="!showModal">
+        <Column
         @select-question="(value) => storeQuestion(value)"
         v-for="(category, index) in categories"
         :columnData="getColumnData(index)"
         :key="index"
-        @click="toggleModal()"
-  
-      />
+      /></div>
+
     </div>
     <section class="scoreboard"></section>
     <div>{{ question }}</div>
@@ -44,6 +48,7 @@ export default {
     const storeQuestion = (dataFromSquare) => {
       console.log("gameboard", dataFromSquare);
       selectedQuestion.value = dataFromSquare;
+      showModal.value = !showModal.value;
     };
 
     const getGameData = async () => {
@@ -99,9 +104,20 @@ export default {
 
 <style>
 .gameBoard {
-  background-color: gray;
+  background-color: white;
+
+}
+.grid{  
   display: flex;
   flex-direction: row;
   justify-content: center;
-}
+  }
+  .controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 1rem;
+    padding: 2px;
+    border: 1px solid black;
+  }
 </style>

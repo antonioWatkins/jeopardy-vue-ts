@@ -1,7 +1,10 @@
 <template>
-  <div class="container">
-    <h1>Jeopardy</h1>
-    <div class="nav">NavBar</div>
+  <div class="App">
+    <div class="header">  
+        <h1 class="title">Jeopardy</h1>
+        <!-- <div class="nav">NavBar</div> -->
+    </div>
+
       <GameBoard />
     <section class="scoreboard"></section>
   </div>
@@ -21,6 +24,22 @@ export default {
 </script>
 
 <style>
+  .App{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header{
+    display:flex; 
+    flex-direction: row;
+  }
+
+  .title{
+    color: #060ce9;
+    font-size: 60px;
+  }
+
 
 
 
